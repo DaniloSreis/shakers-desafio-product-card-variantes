@@ -46,6 +46,7 @@ function selectSize(e) {
 colors.forEach((color) => color.addEventListener("click", selectColor));
 sizes.forEach((size) => size.addEventListener("click", selectSize));
 
+let productList;
 async function addToCart() {
   try {
     const response = await fetch(window.Shopify.routes.root + "cart/add.js", {
@@ -54,12 +55,15 @@ async function addToCart() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        items: [clothes],
+        items: [{
+          id: clothes.id,
+          quantity: 1
+        }],
       }),
     });
 
     const data = await response.json()
-    return data
+    productList = data;
   } catch (err) {
     console.error(err);
   }
