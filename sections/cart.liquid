@@ -1,4 +1,7 @@
 {{ "product-card.css" | asset_url | stylesheet_tag }}
+<script src="{{'product-card.js' |  asset_url}}" defer></script>
+
+{% assign clothes_variants = section.settings.product_id.variants %}
 <header class="header container">
   <h1 class="header__logo">Street Lab</h1>
   <nav class="header__nav">
@@ -11,7 +14,11 @@
       </li>
       <li class="header__item">
         <a href="./" class="header__link">
-        <img src="{{'shopping-bag.svg' |  asset_url }}" alt="" width="auto" height="auto">
+          <img
+            src="{{'shopping-bag.svg' |  asset_url }}"
+            alt=""
+            width="auto"
+            height="auto">
         </a>
       </li>
     </ul>
@@ -20,7 +27,7 @@
 <div class="container">
   <section class="product-card">
     <img
-      src="{{section.settings.product_id.featured_image |  image_url: width: 300 }}"
+      src=""
       alt=""
       class="product-card__image"
       width="auto"
@@ -28,28 +35,68 @@
     <form class="product-card__informations">
       <h2 class="product-card__title">{{ section.settings.product_id.title }}</h2>
       <p class="product-card__description">{{ section.settings.product_id.description | strip_html }}</p>
-      <span class="product-card__price">R$</span>
+      <span class="product-card__price"></span>
 
       <span class="product-card__label">Cor</span>
-      <div class="product-card__colors">
-        <ul class="product-card__options">
-          <li class="product-card__color ">Preto</li>
-          <li class="product-card__color">Branco</li>
-        </ul>
-      </div>
+      <ul class="product-card__colors">
+        <li class="product-card__color product-card__color--selected">Preto</li>
+        <li class="product-card__color">Branco</li>
+      </ul>
       <span class="product-card__label">Tamanho</span>
-      <div class="product-card__sizes">
-        <ul class="product-card__options">
-          <li class="product-card__size product-card__size--selected">P</li>
-          <li class="product-card__size">M</li>
-          <li class="product-card__size">G</li>
-        </ul>
-      </div>
+      <ul class="product-card__sizes">
+        <li class="product-card__size product-card__size--selected">P</li>
+        <li class="product-card__size">M</li>
+        <li class="product-card__size">G</li>
+      </ul>
       <button type="button"></button>
     </form>
   </section>
 </div>
 
+<script>
+  const colors = document.querySelectorAll(".product-card__color")
+  const sizes = document.querySelectorAll(".product-card__size")
+  const productImage = document.querySelector(".product-card__image")
+  const productPrice = document.querySelector(".product-card__price")
+  const productVariants = {{clothes_variants | json}}
+  
+  let currentSize = "p"
+  let currentColor = "preto"
+  function findOption() {
+    const options = currentSize + " / " + currentColor
+    const formatPrice = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    })
+    const clothes = productVariants.find((variant) => {
+      return variant.title.toLowerCase() === options.toLocaleLowerCase() 
+    })
+
+    if (clothes) {
+      productImage.src = clothes.featured_image.src
+      productPrice.innerText = formatPrice.format(clothes.price / 100)
+    }
+  }
+  findOption()
+  
+  function selectColor(e) {
+    colors.forEach((color) => color.classList.remove("product-card__color--selected"))
+    e.currentTarget.classList.add("product-card__color--selected")
+    currentColor = e.currentTarget.innerText.toLowerCase()
+    findOption()
+  } 
+  
+  function selectSize(e) {
+    sizes.forEach((size) => size.classList.remove("product-card__size--selected"))
+    e.currentTarget.classList.add("product-card__size--selected")
+    currentSize= e.currentTarget.innerText.toLowerCase()
+    findOption()
+  
+  } 
+  
+  colors.forEach((color) => color.addEventListener("click", selectColor))
+  sizes.forEach((size) => size.addEventListener("click", selectSize))
+</script>
 
 {% schema %}
   {
