@@ -46,7 +46,7 @@ function selectSize(e) {
 colors.forEach((color) => color.addEventListener("click", selectColor));
 sizes.forEach((size) => size.addEventListener("click", selectSize));
 
-async function addToCart(item) {
+async function addToCart() {
   try {
     const response = await fetch(window.Shopify.routes.root + "cart/add.js", {
       method: "POST",
@@ -54,10 +54,17 @@ async function addToCart(item) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        items: [item],
+        items: [clothes],
       }),
     });
+
+    const data = await response.json()
+    return data
   } catch (err) {
     console.error(err);
   }
 }
+
+const buyButton = document.querySelector(".product-card__button")
+buyButton.addEventListener("click", addToCart)
+
