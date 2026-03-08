@@ -48,6 +48,12 @@ ul {
   padding-inline: 1.5em;
 }
 
+.product-card__informations {
+  display: grid;
+  /* justify-items: start; */
+  align-items: center;
+}
+
 .product-card__image {
   width: 300px;
   height: auto;
@@ -111,4 +117,17 @@ ul {
 .product-card__size--selected {
   background: #000;
   color: #fff;
+}
+
+.product-card__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #000;
+  color: #fff;
+  padding: 1em 1.5em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 5px;
 }
