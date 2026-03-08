@@ -25,7 +25,7 @@
   </nav>
 </header>
 <div class="container">
-  <section class="product-card">
+  <section class="product-card" data-variants='{{clothes_variants | json}}'>
     <img
       src=""
       alt=""
@@ -52,51 +52,6 @@
     </form>
   </section>
 </div>
-
-<script>
-  const colors = document.querySelectorAll(".product-card__color")
-  const sizes = document.querySelectorAll(".product-card__size")
-  const productImage = document.querySelector(".product-card__image")
-  const productPrice = document.querySelector(".product-card__price")
-  const productVariants = {{clothes_variants | json}}
-  
-  let currentSize = "p"
-  let currentColor = "preto"
-  function findOption() {
-    const options = currentSize + " / " + currentColor
-    const formatPrice = new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL"
-    })
-    const clothes = productVariants.find((variant) => {
-      return variant.title.toLowerCase() === options.toLocaleLowerCase() 
-    })
-
-    if (clothes) {
-      productImage.src = clothes.featured_image.src
-      productPrice.innerText = formatPrice.format(clothes.price / 100)
-    }
-  }
-  findOption()
-  
-  function selectColor(e) {
-    colors.forEach((color) => color.classList.remove("product-card__color--selected"))
-    e.currentTarget.classList.add("product-card__color--selected")
-    currentColor = e.currentTarget.innerText.toLowerCase()
-    findOption()
-  } 
-  
-  function selectSize(e) {
-    sizes.forEach((size) => size.classList.remove("product-card__size--selected"))
-    e.currentTarget.classList.add("product-card__size--selected")
-    currentSize= e.currentTarget.innerText.toLowerCase()
-    findOption()
-  
-  } 
-  
-  colors.forEach((color) => color.addEventListener("click", selectColor))
-  sizes.forEach((size) => size.addEventListener("click", selectSize))
-</script>
 
 {% schema %}
   {
