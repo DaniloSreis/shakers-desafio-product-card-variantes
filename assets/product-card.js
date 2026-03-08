@@ -122,4 +122,27 @@ function renderProducts() {
     `;
     cartList.appendChild(productDiv);
   });
+
+  const clearBtn = document.createElement("button");
+  clearBtn.classList.add("cart__clear-button");
+  clearBtn.innerText = "Limpar Sacola";
+  clearBtn.addEventListener("click", clearCart);
+  cartList.appendChild(clearBtn);
+}
+
+async function clearCart() {
+  try {
+    const response = await fetch(window.Shopify.routes.root + "cart/clear.js", {
+      method: "POST",
+      headers: { 
+        "Content-Type": "application/json" 
+      }
+    });
+
+    if (response) {
+      await getCart()
+    }
+  } catch (err) {
+    console.error(err);
+  }
 }
