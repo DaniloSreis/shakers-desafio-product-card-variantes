@@ -64,6 +64,7 @@ async function addToCart() {
 
     const data = await response.json()
     productList = data;
+    await getCart();
   } catch (err) {
     console.error(err);
   }
@@ -87,3 +88,36 @@ function closeCart() {
 
 openCartButton.addEventListener("click", showCart)
 closeCartButton.addEventListener("click", closeCart)
+
+async function getCart() {
+  try {
+    const response = await fetch(window.Shopify.routes.root + "cart.js");
+    const data = await response.json();
+    productList = data.items;
+    renderProducts();
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function renderProducts() {
+  const cartList = document.querySelector(".header__cart-list");
+  cartList.innerHTML = "";
+  productList.forEach((product) => {
+    const productDiv = document.createElement("div");
+    productDiv.classList.add("header__cart-product");
+
+    productDiv.innerHTML = `
+      <img src="${product.image}" width="auto" height="auto" alt="${product.product_title}">
+      <div class="cart-item__details">
+        <p class="cart-item__name">${product.product_title}</p>
+        <span class="cart-item__variant">${product.variant_title}</span>
+        <div class="cart-item__price-row">
+          <span>Qtd: ${product.quantity}</span>
+          <span>${(product.price / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
+        </div>
+      </div>
+    `;
+    cartList.appendChild(productDiv);
+  });
+}
