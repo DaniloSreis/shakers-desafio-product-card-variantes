@@ -1,0 +1,70 @@
+{{ "product-card.css" | asset_url | stylesheet_tag }}
+<header class="header container">
+  <h1 class="header__logo">Street Lab</h1>
+  <nav class="header__nav">
+    <ul class="header__list">
+      <li class="header__item">
+        <a href="./" class="header__link">Produtos</a>
+      </li>
+      <li class="header__item">
+        <a href="" class="header__link">Conta</a>
+      </li>
+      <li class="header__item">
+        <a href="./" class="header__link">
+        <img src="{{'shopping-bag.svg' |  asset_url }}" alt="" width="auto" height="auto">
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+<div class="container">
+  <section class="product-card">
+    <img
+      src="{{section.settings.product_id.featured_image |  image_url: width: 300 }}"
+      alt=""
+      class="product-card__image"
+      width="auto"
+      height="auto">
+    <form class="product-card__informations">
+      <h2 class="product-card__title">{{ section.settings.product_id.title }}</h2>
+      <p class="product-card__description">{{ section.settings.product_id.description | strip_html }}</p>
+      <span class="product-card__price">R$</span>
+
+      <span class="product-card__label">Cor</span>
+      <div class="product-card__colors">
+        <ul class="product-card__options">
+          <li class="product-card__color ">Preto</li>
+          <li class="product-card__color">Branco</li>
+        </ul>
+      </div>
+      <span class="product-card__label">Tamanho</span>
+      <div class="product-card__sizes">
+        <ul class="product-card__options">
+          <li class="product-card__size product-card__size--selected">P</li>
+          <li class="product-card__size">M</li>
+          <li class="product-card__size">G</li>
+        </ul>
+      </div>
+      <button type="button"></button>
+    </form>
+  </section>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Product Card",
+    "settings": [
+      {
+        "type": "product",
+        "id": "product_id",
+        "label": "Produto"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product Card"
+      }
+    ]
+  }
+{% endschema %}
