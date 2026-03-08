@@ -68,3 +68,18 @@ async function addToCart() {
 const buyButton = document.querySelector(".product-card__button")
 buyButton.addEventListener("click", addToCart)
 
+const openCartButton = document.querySelector(".header__button-cart")
+const closeCartButton = document.querySelector(".header__close-button")
+const cartOverlay = document.querySelector(".header__cart-overlay")
+const cart = document.querySelector(".header__cart")
+function showCart() {
+  cart.classList.toggle("open")
+  cartOverlay.classList.toggle("open")
+}
+function closeCart() {
+  cart.classList.remove("open")
+  cartOverlay.classList.remove("open")
+}
+
+openCartButton.addEventListener("click", showCart)
+closeCartButton.addEventListener("click", closeCart)

@@ -24,6 +24,7 @@ ul {
   padding: 0.5em 1.5em;
   align-items: center;
   margin-block-end: 80px;
+  position: relative;
 }
 
 .header__list {
@@ -35,6 +36,44 @@ ul {
 .header__link {
   padding-block: 0.5em;
   color: #000;
+}
+
+.header__button-cart {
+  cursor: pointer;
+  padding-block: 0.5em;
+}
+
+.header__cart {
+  display: none;
+}
+
+.header__cart-overlay.open {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 998;
+}
+
+.header__cart.open {
+  display: grid;
+  align-items: start;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100dvh;
+  width: 350px;
+  background: #fff;
+  padding: 1em;
+  z-index: 999;
+}
+
+.header__close-button {
+  justify-self: end;
+  cursor: pointer;
 }
 
 .container {

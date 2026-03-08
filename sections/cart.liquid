@@ -12,16 +12,22 @@
       <li class="header__item">
         <a href="" class="header__link">Conta</a>
       </li>
-      <li class="header__item">
-        <a href="./" class="header__link">
-          <img
-            src="{{'black-shopping-bag.svg' |  asset_url }}"
-            alt=""
-            width="auto"
-            height="auto">
-        </a>
+      <li class="header__item header__button-cart">
+        <img
+          src="{{'black-shopping-bag.svg' |  asset_url }}"
+          alt=""
+          width="auto"
+          height="auto">
       </li>
     </ul>
+    <div class="header__cart-overlay"></div>
+    <div class="header__cart">
+      <div class="header__close-button"><img
+          src="{{'close.svg'|  asset_url}}"
+          alt=""
+          width="auto"
+          height="auto"></div>
+    </div>
   </nav>
 </header>
 <div class="container">
