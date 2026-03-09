@@ -9,14 +9,15 @@
  */
 {
   "sections": {
-    "cart": {
+    "product_card_custom_gAGaxg": {
       "type": "product-card-custom",
+      "name": "Product Card",
       "settings": {
         "product_id": "camiseta-oversized"
       }
     }
   },
   "order": [
-    "cart"
+    "product_card_custom_gAGaxg"
   ]
 }
