@@ -50,7 +50,7 @@
           <ul class="product-card__list product-card__list--{{ option.name | handleize }}">
             {% for value in option.values %}
               <li
-                class="product-card__option"
+                class="product-card__option {% if value == "P" %}selected{% endif %}"
                 data-option-name="{{ option.name | handleize }}"
                 data-value="{{ value | escape }}">
                 {{ value }}
