@@ -9,7 +9,7 @@
  */
 {
   "sections": {
-    "product_card_custom_gAGaxg": {
+    "product_card_custom_Meazbd": {
       "type": "product-card-custom",
       "name": "Product Card",
       "settings": {
@@ -18,6 +18,6 @@
     }
   },
   "order": [
-    "product_card_custom_gAGaxg"
+    "product_card_custom_Meazbd"
   ]
 }
