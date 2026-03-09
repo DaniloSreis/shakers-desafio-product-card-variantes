@@ -9,7 +9,7 @@ let clothes;
 let currentSize = "p";
 let currentColor = "preto";
 function findOption() {
-  const options = currentSize + " / " + currentColor;
+  const options = currentColor + " / " + currentSize;
   const formatPrice = new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",
