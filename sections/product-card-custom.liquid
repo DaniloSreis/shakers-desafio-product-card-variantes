@@ -45,17 +45,19 @@
         <p class="product-card__description">{{ section.settings.product_id.description | strip_html }}</p>
         <span class="product-card__price"></span>
 
-        <span class="product-card__label">Cor</span>
-        <ul class="product-card__colors">
-          <li class="product-card__color product-card__color--selected">Preto</li>
-          <li class="product-card__color">Branco</li>
-        </ul>
-        <span class="product-card__label">Tamanho</span>
-        <ul class="product-card__sizes">
-          <li class="product-card__size product-card__size--selected">P</li>
-          <li class="product-card__size">M</li>
-          <li class="product-card__size">G</li>
-        </ul>
+        {% for option in section.settings.product_id.options_with_values %}
+          <span class="product-card__label">{{ option.name }}</span>
+          <ul class="product-card__list product-card__list--{{ option.name | handleize }}">
+            {% for value in option.values %}
+              <li
+                class="product-card__option"
+                data-option-name="{{ option.name | handleize }}"
+                data-value="{{ value | escape }}">
+                {{ value }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
         <div class="product-card__button">
           Adicionar a sacola
           <img
