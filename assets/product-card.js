@@ -25,26 +25,29 @@ function findOption() {
 }
 findOption();
 
-function selectColor(e) {
-  colors.forEach((color) =>
-    color.classList.remove("product-card__color--selected"),
-  );
-  e.currentTarget.classList.add("product-card__color--selected");
-  currentColor = e.currentTarget.innerText.toLowerCase();
+const allOptions = document.querySelectorAll(".product-card__option");
+
+function selectOption(e) {
+  const element = e.currentTarget;
+  const optionType = element.dataset.optionName;
+  const value = element.dataset.value;
+
+  element.parentElement.querySelectorAll(".product-card__option").forEach((option) => {
+    option.classList.remove("selected");
+  });
+  
+  element.classList.add("selected");
+
+  if (optionType === "tamanhos") {
+    currentSize = value;
+  } else if (optionType === "cores") {
+    currentColor = value;
+  }
+
   findOption();
 }
 
-function selectSize(e) {
-  sizes.forEach((size) =>
-    size.classList.remove("product-card__size--selected"),
-  );
-  e.currentTarget.classList.add("product-card__size--selected");
-  currentSize = e.currentTarget.innerText.toLowerCase();
-  findOption();
-}
-
-colors.forEach((color) => color.addEventListener("click", selectColor));
-sizes.forEach((size) => size.addEventListener("click", selectSize));
+allOptions.forEach((option) => option.addEventListener("click", selectOption));
 
 let productList;
 async function addToCart() {
