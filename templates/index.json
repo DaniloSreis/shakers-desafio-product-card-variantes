@@ -9,15 +9,12 @@
  */
 {
   "sections": {
-    "product_card_custom_Meazbd": {
-      "type": "product-card-custom",
-      "name": "Product Card",
-      "settings": {
-        "product_id": "camiseta-oversized"
-      }
+    "main": {
+      "type": "hero-slider",
+      "settings": {}
     }
   },
   "order": [
-    "product_card_custom_Meazbd"
+    "main"
   ]
 }
